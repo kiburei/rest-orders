@@ -13,3 +13,28 @@
  *= require_tree .
  *= require_self
  */
+ @import "material";
+
+ :root {
+     --red: #7B1721;
+     --brown: #C9A97B;
+     --khaki: #C5BFBF;
+ }
+
+.side-nav {
+  float: left;
+  background-color: var(--red);
+  width: 15%;
+  height: 100vh;
+}
+
+.logo {
+  padding: 30px;
+  text-align: center;
+  background-color: #F1F1F1;
+}
+
+.main {
+  margin-left: 15%;
+  overflow-y: scroll;
+}

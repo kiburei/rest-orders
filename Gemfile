@@ -3,6 +3,17 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+gem 'bootstrap',     '4.1.1'
+
+gem 'material-sass', '4.1.1'
+
+gem 'material_icons'
+
+gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
+
+gem 'rails-ujs', '~> 0.1.0'
+
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1'
 # Use sqlite3 as the database for Active Record
