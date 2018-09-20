@@ -17,4 +17,19 @@
 //= require jquery
 //= require popper
 //= require bootstrap
-//= require material
+//= require materialize
+
+function order_items(id) {
+  document.getElementById('order_items' + id).style.display = 'block';
+}
+
+function xorder(id) {
+  document.getElementById('order_items' + id).style.display = 'none';
+}
+function payments(id) {
+  document.getElementById('payments' + id).style.display = 'block';
+}
+
+function xtransaction(id) {
+  document.getElementById('payments' + id).style.display = 'none';
+}

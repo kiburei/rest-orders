@@ -13,12 +13,27 @@
  *= require_tree .
  *= require_self
  */
- @import "material";
+ @import "materialize/components/color-variables";
+ $primary-color: color("blue", "lighten-2") !default;
+ $secondary-color: color("yellow", "base") !default;
+ @import "materialize";
 
  :root {
      --red: #7B1721;
      --brown: #C9A97B;
      --khaki: #C5BFBF;
+ }
+
+ .reds {
+   background-color: var(--red);
+ }
+
+ .browns {
+   background-color:  var(--brown);
+ }
+
+ .khakis {
+   background-color: var(--khaki);
  }
 
 .side-nav {
@@ -36,5 +51,13 @@
 
 .main {
   margin-left: 15%;
+  height: 100vh;
   overflow-y: scroll;
+}
+
+.card {
+  padding: 30px;
+  color: white;
+  text-align: center;
+  font-size: 25px;
 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_20_075116) do
+ActiveRecord::Schema.define(version: 2018_09_20_154214) do
 
   create_table "menus", primary_key: "menu_id", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "item_name"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 2018_09_20_075116) do
     t.decimal "order_cost", precision: 11, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "status", default: false
+    t.string "table_no"
   end
 
   create_table "transactions", primary_key: "transaction_id", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
