@@ -1,0 +1,87 @@
+<h1>History</h1>
+<% if account_signed_in? || cashier_signed_in? %>
+<h5>Filter Data</h5>
+<div class="filter-form">
+  <form class="" action="index.html" method="post">
+    <div class="row">
+      <div class="col s5">
+        <input type="text" name="" value="start date">
+      </div>
+      <div class="col s5">
+        <input type="text" name="" value="end date">
+      </div>
+      <div class="col s2">
+        <button class="btn white" type="button" name="button">search</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+<div class="search">
+  <div class="row">
+    <div class="col 11">
+      <input type="text" name="" placeholder="Enter Transaction Ref/ Order Ref or Phone No.">
+    </div>
+    <div class="col 1">
+      <a href="#"><i class="material-icons">search</i></a>
+    </div>
+  </div>
+</div>
+  <h1>Orders</h1>
+  <table class="table striped">
+    <thead>
+      <th>Order ID</th>
+      <th>Order Items</th>
+      <th>Table No.</th>
+      <th>Waiter</th>
+      <th>Order Total</th>
+      <th>Payment</th>
+      <td>Status</td>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.order_id %></td>
+          <td>
+            <div class="tooltip">
+              <button class="btn white" onclick="order_items(<%= order.order_id %>)">View Order Items(<%= order.order_items.count %>)</button>
+              <span class="tooltiptext">Click</span>
+            </div>
+            <div id="order_items<%= order.order_id %>" style="display: none">
+              <% order.order_items.each do |item| %>
+              <li><%= item.menu.item_name %>   <span style="float: right"><%= number_to_currency(item.menu.item_cost, unit: "KES ") %></span> </li>
+              <% end %>
+              <button onclick="xorder(<%= order.order_id %>)">X</button>
+            </div>
+          </td>
+          <td><%= order.table_no %></td>
+          <td><%= ["John", "Ali"].sample %></td>
+          <td><%= number_to_currency(order.order_cost, unit: "KES ") %></td>
+          <td>
+            <div class="tooltip">
+              <button class="btn white" onclick="payments(<%= order.order_id %>)" name="button">(<%= order.transactions.count %>) view payments</button>
+              <span class="tooltiptext">Click</span>
+            </div>
+            <div id="payments<%= order.order_id %>" style="display: none">
+              <% order.transactions.each do |transaction| %>
+                <li><%= transaction.transaction_id %> MP3S4R3F <span style="float: right"><%= number_to_currency(transaction.transaction_amount, unit: "KES ") %></span> </li>
+              <% end %>
+              <button onclick="xtransaction(<%= order.order_id %>)">X</button>
+            </div>
+          </td>
+          <% if order.order_cost == order.transactions.sum(:transaction_amount) %>
+            <td> <p>Paid</p> </td>
+          <% else %>
+            <td> <p><%= number_to_currency((order.order_cost - order.transactions.sum(:transaction_amount)), unit: "KES ") %></p> </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @orders %>
+
+<% else %>
+  <div class="warning">
+    <p>Contact admin to gain access</p>
+  </div>
+<% end %>

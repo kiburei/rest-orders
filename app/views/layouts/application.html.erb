@@ -5,17 +5,67 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
     <div class="side-nav">
       <div class="logo">
-        <%= image_tag 'logo' %>
+        <a href="/"><%= image_tag 'logo' %></a>
+          <div class="accounts">
+            <p>Transactions Portal</p>
+            <% if account_signed_in? %>
+            Welcome <%= current_account.email %>
+            <!-- <%= link_to "Log Out", destroy_account_session_path, method: 'DELETE'%> -->
+            <% end %>
+            <% if cashier_signed_in? %>
+            Welcome <%= current_cashier.email %>
+            <!-- <%= link_to "Log Out", destroy_cashier_session_path, method: 'DELETE'%> -->
+            <% end %>
+          </div>
       </div>
-
+      <div class="side-menu">
+        <li><%= link_to "Transactions", history_path %></li>
+        <% if account_signed_in? %>
+          <li><%= link_to "Log Out", destroy_account_session_path, method: 'DELETE'%></li>
+        <% end %>
+        <% if cashier_signed_in? %>
+          <li><%= link_to "Log Out", destroy_cashier_session_path, method: 'DELETE'%></li>
+        <% end %>
+      </div>
     </div>
     <div class="main">
         <%= yield %>
+        <footer>
+          <h4>Daily Trends</h4>
+          <div class="row">
+            <div class="col s4">
+              <h6>Top Selling Waiters</h6>
+              <ol>
+                <li>Ali - <%= rand(40..50) %> Orders - Total: <%= number_to_currency(rand(10000..40000), unit: "KES ") %></li>
+                <li>John - <%= rand(30..40) %> Orders - Total: <%= number_to_currency(rand(10000..40000), unit: "KES ") %></li>
+                <li>Moses - <%= rand(20..30) %> Orders - Total: <%= number_to_currency(rand(10000..40000), unit: "KES ") %></li>
+              </ol>
+            </div>
+            <div class="col s4">
+              <h6>Top Selling Foods</h6>
+              <ol>
+                <% @topfoods = OrderItem.order("order_id DESC").offset(3).limit(3) %>
+                <% @topfoods.each do |food| %>
+                  <li><%= food.menu.item_name %> - <%= OrderItem.where(menu_id: food.menu_id).count %> - <%= number_to_currency(OrderItem.where(menu_id: food.menu_id).count * Menu.find(food.menu_id).item_cost, unit: 'KES ') %></li>
+                <% end %>
+              </ol>
+            </div>
+            <div class="col s4">
+              <h6>Top Favourite Tables</h6>
+              <ol>
+                <li>table 10 - KES 76,000</li>
+                <li>table 03 - KES 45,500</li>
+                <li>table 15 - KES 42,000</li>
+              </ol>
+            </div>
+          </div>
+        </footer>
     </div>
   </body>
 </html>

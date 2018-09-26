@@ -45,11 +45,14 @@
 
 .logo {
   padding: 30px;
+  padding-top: 35px;
+  padding-bottom: 35px;
   text-align: center;
   background-color: #F1F1F1;
 }
 
 .main {
+  padding: 20px;
   margin-left: 15%;
   height: 100vh;
   overflow-y: scroll;
@@ -60,4 +63,65 @@
   color: white;
   text-align: center;
   font-size: 25px;
+}
+
+.warning {
+  font-style: oblique;
+  text-align: center;
+  align-items: center;
+}
+
+.btn {
+  color: blue;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    /* Position the tooltip */
+    position: absolute;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.filter-form {
+  float: left;
+}
+
+.search {
+  float: right;
+}
+
+.side-menu {
+  list-style: none;
+  line-height: 60px;
+  padding: 50px;
+  font-size: 30px;
+  text-align: center;
+  li {
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    color: var(--khaki);
+  }
+  a {
+    color: var(--khaki);
+  }
+
+  a:hover {
+    color: white;
+  }
+}
+
+footer {
+}
+
+.x {
+  // border-radius: 10px;
 }

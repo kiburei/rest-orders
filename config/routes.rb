@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :accounts
+  devise_for :cashiers
   root 'dashboard#index'
+  get 'history' => 'dashboard#transactions'
+  # API endpoints
   get 'menu' => 'endpoints#menu'
   get 'orders' => 'endpoints#orders'
   get 'transactions' => 'endpoints#transactions'

@@ -1,4 +1,5 @@
 class EndpointsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_order, only: [:order, :order_items, :order_transactions, :create_transaction]
   before_action :set_transaction, only: [:transaction]
   include Response
@@ -32,6 +33,7 @@ class EndpointsController < ApplicationController
 
   def create_transaction
     @order.transactions.create!(transaction_params)
+    json_response(@order.transactions.last, "Paid")
   end
 
   def order_transactions
