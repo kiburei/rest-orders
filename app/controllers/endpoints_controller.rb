@@ -32,8 +32,8 @@ class EndpointsController < ApplicationController
   end
 
   def create_transaction
-    @order.transactions.create!(transaction_params)
-    json_response(@order.transactions.last, "Paid")
+    @transaction = Transaction.create!(transaction_params)
+    json_response(@order.transactions.last)
   end
 
   def order_transactions
@@ -65,7 +65,7 @@ class EndpointsController < ApplicationController
   end
 
   def transaction_params
-    params.permit(:transaction_amount, :transaction_channel)
+    params.permit(:transaction_amount, :transaction_channel, :order_id)
   end
 
 end
